@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
@@ -14,8 +15,8 @@ class Post(models.Model):
   author = models.ForeignKey(User) # Userテーブルを外部参照
   title = models.CharField(max_length = 32)
   text = models.TextField()
-  created_date = models.DateTimeField()
-  published_date = models.DateTimeField()
+  created_date = models.DateTimeField(default = timezone.now)
+  published_date = models.DateTimeField(blank = True, null =True)
 
   def publish(self): # 投稿更新
     self.published_date = timezone.now()
