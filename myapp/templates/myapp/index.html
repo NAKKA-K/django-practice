@@ -2,6 +2,16 @@
 
 {% block contents %}
 
-<h1>Hello! My Site!</h1>
+  <h1>Hello! My Site!</h1>
+
+  <table class="table">
+  {% for post in posts %}
+    <thead><tr><th>
+    <h1><a href="">{{ post.title }}</a></h1>
+    <p>{{ post.published_date }}</p>
+    <p>{{ post.text | linebreaks }}</p>
+    </th></tr></thead>
+  {% endfor %}
+  </table>
 
 {% endblock contents %}
