@@ -1,9 +1,31 @@
-from django.shortcuts import render
-from django.shortcuts import get_list_or_404
+from django.shortcuts import render, get_list_or_404, get_object_or_404, redirect
+from django.views.generic.edit import FormView
 from .models import Post
+from .forms import PostForm
 
 # Create your views here.
 
 def index(request):
   posts = get_list_or_404(Post)
   return render(request, 'myapp/index.html', {'posts': posts})
+
+def detail(request, pk):
+  post = get_object_or_404(Post, pk = pk)
+  return render(request, 'myapp/detail.html', {'post': post})
+
+class PostNew(FormView):
+  form_class = PostForm
+  template_name = 'myapp/new.html'
+  
+  def post(self, request, *args, **kwargs):
+    form_class = self.get_form_class()
+    form = self.get_form(form_class)
+    if form.is_valid():
+      post = form.save(commit = False) # 現在のフォーム内容をDBに登録せずに、戻り値で受け取る
+      post.author = request.user
+      post.save()
+      # detailにpkにpost.pkを渡し、飛ばす
+      return redirect('post:detail', pk = post.pk)
+    else:
+      return self.form_invalid(form)
+

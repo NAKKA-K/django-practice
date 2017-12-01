@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block contents %}
+
+  <p><a href="{% url 'post:index' %}">一覧に戻る</a></p>
+
+  <h1>{{ post.title }}</h1>
+  <p>公開日:{{ post.published_date }}</p>
+  <p>投稿者:{{ post.author }}</p>
+  <Hr>
+  <p>{{ post.text | linebreaks }}</p>
+
+{% endblock contents %}
