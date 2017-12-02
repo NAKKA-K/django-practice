@@ -17,15 +17,10 @@ class PostNew(FormView):
   form_class = PostForm
   template_name = 'myapp/new.html'
   
-  def post(self, request, *args, **kwargs):
-    form_class = self.get_form_class()
-    form = self.get_form(form_class)
-    if form.is_valid():
-      post = form.save(commit = False) # 現在のフォーム内容をDBに登録せずに、戻り値で受け取る
-      post.author = request.user
-      post.save()
-      # detailにpkにpost.pkを渡し、飛ばす
-      return redirect('post:detail', pk = post.pk)
-    else:
-      return self.form_invalid(form)
+  def form_valid(self, form):
+    post = form.save(commit = False) # 現在のフォーム内容をDBに登録せずに、戻り値で受け取る
+    post.author = self.request.user
+    post.save()
+    # detailにpkにpost.pkを渡し、飛ばす
+    return redirect('post:detail', pk = post.pk)
 
