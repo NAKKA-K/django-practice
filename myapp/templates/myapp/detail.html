@@ -4,9 +4,14 @@
 
   <p><a href="{% url 'post:index' %}">一覧に戻る</a></p>
 
-  <h1>{{ post.title }}</h1>
-  <p>公開日:{{ post.published_date }}</p>
-  <p>投稿者:{{ post.author }}</p>
+  <h1>{{ post.title }}
+    <a class="btn btn-default pull-right" href="{% url 'post:edit' pk=post.pk%}">
+      <span title="Edit post" class="glyphicon glyphicon-pencil">Edit</span>
+    </a>
+  </h1>
+  
+  <p>公開日: {{ post.published_date }}</p>
+  <p>投稿者: {{ post.author }}</p>
   <Hr>
   <p>{{ post.text | linebreaks }}</p>
 
