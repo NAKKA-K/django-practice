@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_list_or_404, get_object_or_404, redirect
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, UpdateView
+from django.urls import reverse_lazy
 from .models import Post
 from .forms import PostForm
+
 
 # Create your views here.
 
@@ -24,3 +26,7 @@ class PostNew(FormView):
     # detailにpkにpost.pkを渡し、飛ばす
     return redirect('post:detail', pk = post.pk)
 
+class PostUpdate(UpdateView):
+  model = Post
+  fields = ['title', 'text']
+  template_name = 'myapp/edit.html'
