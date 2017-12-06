@@ -25,6 +25,7 @@
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
+
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -34,16 +35,30 @@
           </button>
           <a class="navbar-brand" href="#">MyApp</a>
         </div>
+
         <div id="navbar" class="collapse navbar-collapse">
+
+          <!-- 画面上のバー -->
           <ul class="nav navbar-nav">
-            <!-- 画面上のバー -->
             <li class=""><a href="{% url 'admin:index' %}">admin</a></li>
-            <li class=""><a href="{% url 'post:index' %}">myapp</a></li>
+            <li role="presentation" class="{% block nav_post %}{% endblock %} dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" role="button">myapp<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li role="presentation"><a href="{% url 'post:index' %}">HOME</a></li>
+                <li role="presentation"><a href="{% url 'post:new' %}">新規作成</a></li>
+                <li role="presentation"><a href="{% url 'post:draft_list' %}">下書きリスト</a></li>
+              </ul>
+            </li>
           </ul>
+
+          <!-- ヘッダー右側のアイコン -->
           <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'post:draft_list' %}" class=""><span class="plyphicon plyphicon-edit"></span></a></li>
             <li><a href="{% url 'post:new' %}" class=""><span class="glyphicon glyphicon-plus"></span></a></li>
           </ul>
+
         </div><!--/.nav-collapse -->
+
       </div>
     </nav>
 

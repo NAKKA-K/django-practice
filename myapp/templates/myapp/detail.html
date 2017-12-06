@@ -5,12 +5,20 @@
   <p><a href="{% url 'post:index' %}">一覧に戻る</a></p>
 
   <h1>{{ post.title }}
-    <a class="btn btn-default pull-right" href="{% url 'post:edit' pk=post.pk%}">
+    <a class="btn btn-default pull-right" href="{% url 'post:publish' pk=post.pk %}">
+      <span title="Publish" class="glyphicon glyphicon-upload">Publish</span>
+    </a>
+    <a class="btn btn-default pull-right" href="{% url 'post:edit' pk=post.pk %}">
       <span title="Edit Post" class="glyphicon glyphicon-pencil">Edit</span>
     </a>
   </h1>
-  
-  <p>公開日: {{ post.published_date }}</p>
+
+  {% if post.published_date %}
+    <p>公開日: {{ post.published_date }}</p>
+  {% else %}
+    <p>公開日: 未公開</p>
+  {% endif %}
+
   <p>投稿者: {{ post.author }}</p>
   <Hr>
   <p>{{ post.text | linebreaks }}</p>

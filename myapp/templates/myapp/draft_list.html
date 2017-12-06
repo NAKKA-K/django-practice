@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block contents %}
+  <h1>下書き</h1>
+
+  <table class="table">
+
+  {% for post in object_list %}
+    <thead><tr><th>
+
+      <h1><a href="{% url 'post:detail' pk=post.pk %}">{{ post.title }}</a></h1>
+      <p>created: {{ post.created_date }}</p>
+
+      {% if post.published_date %}
+        <p>公開日: {{ post.published_date }}</p>
+      {% else %}
+        <p>公開日: 未公開</p>
+      {% endif %}
+
+      <p>{{ post.text | linebreaks }}</p>
+
+    </th></tr></thead>
+  {% endfor %}
+
+  </table>
+{% endblock contents %}

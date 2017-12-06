@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_list_or_404, get_object_or_404, redirect
 from django.views.generic.edit import FormView, UpdateView
-from django.urls import reverse_lazy
+from django.views.generic.list import ListView
 from .models import Post
 from .forms import PostForm
 
@@ -30,3 +30,21 @@ class PostUpdate(UpdateView):
   model = Post
   fields = ['title', 'text']
   template_name = 'myapp/edit.html'
+
+class PostPublish(UpdateView):
+  model = Post
+
+  def get(self, request, **kwargs):
+    post = get_object_or_404(Post, pk = kwargs['pk'])
+    post.publish()
+    return redirect('post:detail', pk = post.pk)
+
+
+class DraftList(ListView):
+  model = Post
+  template_name = 'myapp/draft_list.html'
+
+  def get_context_date(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['drafts'] = get_list_or_404(Post).filter(published_date__isnull=True).order_by('created_date')
+    return context
