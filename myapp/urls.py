@@ -8,5 +8,7 @@ urlpatterns = [
   url(r'^(?P<pk>[0-9]+)/edit/$', views.PostUpdate.as_view(), name = 'edit'),
   url(r'^drafts/$', views.DraftList.as_view(), name = 'draft_list'),
   url(r'^(?P<pk>[0-9]+)/publish/$', views.PostPublish.as_view(), name = 'publish'),
+  url(r'^(?P<pk>[0-9]+)/delete/$', views.PostDelete.as_view(), name = 'delete'),
 
+  url(r'^(?P<pk>[0-9]+)/comment/$', views.CommentCreate.as_view(), name = 'create_comment'),
 ]

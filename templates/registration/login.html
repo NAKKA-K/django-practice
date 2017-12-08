@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+
+{% block contents %}
+  {% if next %}
+    {% if user.is_authenticated %}
+        <p>ページにアクセスするには権限がありません</p>
+    {% else %}
+        <p>ページにアクセスするにはログインが必要です</p>
+    {% endif %}
+  {% endif %}
+
+  <form role="form" action="{% url 'login' %}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+
+
+    <input class="btn btn-primary btn-lg btn-block" type="submit" value="ログイン"/>
+    {% if next %}
+      <input type="hidden" name="next" value={{ next }} />
+    {% endif %}
+  </form>
+
+  <p><a href="">パスワードを忘れましたか？</a></p>
+{% endblock contents %}
+

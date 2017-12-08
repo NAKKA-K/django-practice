@@ -5,12 +5,19 @@
   <p><a href="{% url 'post:index' %}">一覧に戻る</a></p>
 
   <h1>{{ post.title }}
-    <a class="btn btn-default pull-right" href="{% url 'post:publish' pk=post.pk %}">
-      <span title="Publish" class="glyphicon glyphicon-upload">Publish</span>
-    </a>
-    <a class="btn btn-default pull-right" href="{% url 'post:edit' pk=post.pk %}">
-      <span title="Edit Post" class="glyphicon glyphicon-pencil">Edit</span>
-    </a>
+    {% if user.is_authenticated %}
+      <a class="btn btn-default pull-right" href="{% url 'post:delete' pk=post.pk %}">
+        <span title="Delete" class="glyphicon glyphicon-remove"></span>
+      </a>
+      <a class="btn btn-default pull-right" href="{% url 'post:edit' pk=post.pk %}">
+        <span title="Edit Post" class="glyphicon glyphicon-pencil">Edit</span>
+      </a>
+      {% if not post.published_date %}
+        <a class="btn btn-default pull-right" href="{% url 'post:publish' pk=post.pk %}">
+          <span title="Publish" class="glyphicon glyphicon-upload">Publish</span>
+        </a>
+      {% endif %}
+    {% endif %}
   </h1>
 
   {% if post.published_date %}
@@ -23,4 +30,18 @@
   <Hr>
   <p>{{ post.text | linebreaks }}</p>
 
+
+
+  <hr>
+  <a class="btn btn-default" href="{% url 'post:create_comment' pk=post.pk %}">
+    <span title="Comment" class="">コメントする</span>
+  </a>
+
+  {% for comment in post.comments.all %}
+    <p>作成日: {{ comment.create_date }}</p>
+    <strong>{{ comment.author }}</strong>
+    <p>{{ comment.text | linebreaks }}</p>
+  {% empty %}
+    <p>コメントがありません(^Д^)</p>
+  {% endfor %}
 {% endblock contents %}
