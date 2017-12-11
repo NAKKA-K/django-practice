@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 
 {% block contents %}
+  <h1>コメント作成</h1>
 
+  <form action="" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+
+    <button type="submit" class="btn btn-default">
+      {% bootstrap_icon "plus" %} Send
+    </button>
+  </form>
 {% endblock contents %}

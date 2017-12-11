@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block contents %}
+  {% if object.id %}
+    <h1>Update User</h1>
+  {% else %}
+    <h1>Create User</h1>
+  {% endif %}
+
+  <form method="POST" action="">
+    {% csrf_token %}
+
+    {% bootstrap_form form %}
+
+    <input type="submit" id="save" value="Save">
+  </form>
+
+{% endblock %}

@@ -11,4 +11,8 @@ urlpatterns = [
   url(r'^(?P<pk>[0-9]+)/delete/$', views.PostDelete.as_view(), name = 'delete'),
 
   url(r'^(?P<pk>[0-9]+)/comment/$', views.CommentCreate.as_view(), name = 'create_comment'),
+  url(r'^(?P<pk>[0-9]+)/comment/approve/$', views.CommentApprove.as_view(), name = 'approve_comment'),
+  url(r'^(?P<pk>[0-9]+)/comment/remove/$', views.CommentRemove.as_view(), name = 'remove_comment'),
+
+  url(r'user_creation/$', views.AccountCreateView.as_view(), name='user_creation')
 ]

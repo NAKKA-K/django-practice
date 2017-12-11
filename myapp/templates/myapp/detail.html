@@ -37,11 +37,20 @@
     <span title="Comment" class="">コメントする</span>
   </a>
 
+
   {% for comment in post.comments.all %}
-    <p>作成日: {{ comment.create_date }}</p>
-    <strong>{{ comment.author }}</strong>
-    <p>{{ comment.text | linebreaks }}</p>
+    {% if user.is_authenticated or comment.approved_comment %}
+      <p>投稿者: <strong>{{ comment.author }}</strong> 作成日: {{ comment.created_date }}</p>
+      <p>{{ comment.text | linebreaks }}</p>
+
+      {% if not comment.approved_comment %}
+        <a class="btn btn-default" href="{% url 'post:remove_comment' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+        <a class="btn btn-default" href="{% url 'post:approve_comment' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+      {% endif %}
+
+    {% endif %}
   {% empty %}
     <p>コメントがありません(^Д^)</p>
   {% endfor %}
+
 {% endblock contents %}

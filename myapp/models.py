@@ -34,5 +34,8 @@ class Comment(models.Model):
     self.approved_comment = True
     self.save()
 
+  def approved(self):
+    return self.comments.filter(approved_comment = True)
+
   def __str__(self):
     return self.text
