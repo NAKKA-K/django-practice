@@ -103,3 +103,11 @@ class AccountCreateView(CreateView):
   def get_success_url(self):
     return reverse('login')
 
+
+
+
+def regi_view(request):
+  return render(request, 'myapp/forgotpassword.html')
+
+def kadai_view(request):
+  return render(request, 'myapp/kadaiform.html')
