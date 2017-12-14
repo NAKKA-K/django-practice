@@ -4,6 +4,7 @@
   <h1>新規追加</h1>
   <form action="" method="POST">
     {% csrf_token %}
+    {{ form.title.errors }}
     {% bootstrap_form form %}
 
     <button type="submit" class="btn btn-primary">

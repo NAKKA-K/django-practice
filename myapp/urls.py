@@ -17,7 +17,6 @@ urlpatterns = [
   url(r'user_creation/$', views.AccountCreateView.as_view(), name='user_creation'),
 
 
-
   url(r'regi/$', views.regi_view, name = 'regi'),
   url(r'kadai/$', views.kadai_view, name = 'kadai'),
 ]

@@ -9,12 +9,8 @@ from django.views.generic.list import ListView
 from .models import Post, Comment
 from .forms import PostForm
 
-
+from django.core.exceptions import ValidationError
 # Create your views here.
-
-class IndexView(ListView):
-  model = Post
-  template_name = 'myapp/index.html'
 
 def index(request):
   posts = get_list_or_404(Post)
