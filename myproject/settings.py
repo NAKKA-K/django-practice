@@ -130,5 +130,5 @@ STATICFILES_DIRS = (
 
 LOGIN_REDIRECT_URL = '/'
 
-
 AUTH_USER_MODEL = 'myapp.User'
+

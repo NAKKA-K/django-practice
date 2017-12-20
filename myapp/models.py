@@ -6,13 +6,14 @@ from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.core.mail import send_mail
 from django.utils.translation import ugettext_lazy as _
-
+#from myproject import settings
+from django.conf import settings
 
 # Create your models here.
 
 # 投稿を保存するテーブル
 class Post(models.Model):
-  author = models.ForeignKey('auth.User') # Userテーブルを外部参照
+  author = models.ForeignKey(settings.AUTH_USER_MODEL) # Userテーブルを外部参照
   title = models.CharField(max_length = 32)
   text = models.TextField()
   created_date = models.DateTimeField(default = timezone.now)
@@ -47,6 +48,8 @@ class Comment(models.Model):
     return self.text
 
 
+
+
 class UserManager(BaseUserManager):
   use_in_migrations = True
 
@@ -57,7 +60,7 @@ class UserManager(BaseUserManager):
     if not email:
       raise ValueError('The given email must be set')
 
-    email = self.normaliza_email(email)
+    email = self.normalize_email(email)
     user = self.model(email=email, **extra_fields)
     user.set_password(password)
     user.save(using=self._db)
@@ -65,17 +68,17 @@ class UserManager(BaseUserManager):
 
   def create_user(self, email, password = None, **extra_fields):
     extra_fields.setdefault('is_staff', False)
-    extra_fields.setdefault('is_supperuser', False)
+    extra_fields.setdefault('is_superuser', False)
     return self._create_user(email, password, **extra_fields)
 
-  def create_supperuser(self, email, password, **extra_fields):
+  def create_superuser(self, email, password, **extra_fields):
     extra_fields.setdefault('is_staff', True)
-    extra_fields.setdefault('is_supperuser', True)
+    extra_fields.setdefault('is_superuser', True)
 
     if extra_fields.get('is_staff') is not True:
-      raise ValueError('Supperuser must have is_staff=True')
-    if extra_fields.get('is_supperuser') is not True:
-      raise ValueError('Supperuser must have is_supperuser=True')
+      raise ValueError('Superuser must have is_staff=True')
+    if extra_fields.get('is_superuser') is not True:
+      raise ValueError('Superuser must have is_supperuser=True')
 
     return self._create_user(email, password, **extra_fields)
 
@@ -85,7 +88,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     unique = True,
     error_messages = {'unique': _("A user with that email already exists.")},
   )
-  first_name = models.CharField(_('first name'), max_length = 30, blanck = True)
+  first_name = models.CharField(_('first name'), max_length = 30, blank = True)
   last_name = models.CharField(_('last name'), max_length = 150, blank = True)
 
   is_staff = models.BooleanField(
@@ -105,7 +108,7 @@ class User(AbstractBaseUser, PermissionsMixin):
   objects = UserManager()
 
   EMAIL_FIELD = 'email'
-  USErNAME_FIELD = 'email'
+  USERNAME_FIELD = 'email'
   REQUIRED_FIELD = []
 
   class Meta:
@@ -121,7 +124,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     """Return the short name for the user."""
     return self.first_name
 
-  def email_user(self, subject, message, from_email = None, **kwargs)
+  def email_user(self, subject, message, from_email = None, **kwargs):
     """Send an email to this user."""
     send_mail(subject, message, from_email, [self.email], **kwargs)
 

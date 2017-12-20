@@ -9,6 +9,7 @@ from .models import User
 admin.site.register(Post)
 admin.site.register(Comment)
 
+
 class MyUserChangesForm(UserChangeForm):
   class Meta:
     model = User
@@ -23,7 +24,7 @@ class MyUserAdmin(UserAdmin):
   fieldsets = (
       (None, {'fields': ('email', 'password')}),
       (_('Personal info'), {'fields': ('first_name', 'last_name')}),
-      (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_supperuser',
+      (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                      'groups', 'user_permissions' )}),
       (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
   )
@@ -36,8 +37,8 @@ class MyUserAdmin(UserAdmin):
   form = MyUserChangesForm
   add_form = MyUserCreationForm
   list_display = ('email', 'first_name', 'last_name', 'is_staff')
-  list_filter = ('is_staff', 'is_supperuser', 'is_active', 'groups')
+  list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups')
   search_fields = ('email', 'first_name', 'last_name')
   ordering = ('email',)
 
-  admin.site.register(User, MyUserAdmin)
+admin.site.register(User, MyUserAdmin)
