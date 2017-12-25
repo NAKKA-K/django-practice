@@ -91,6 +91,10 @@ class User(AbstractBaseUser, PermissionsMixin):
   first_name = models.CharField(_('first name'), max_length = 30, blank = True)
   last_name = models.CharField(_('last name'), max_length = 150, blank = True)
 
+  school_year = models.IntegerField(_('school year'), blank = True, null = True)
+  school_class = models.IntegerField(_('school class'), blank = True, null = True)
+  school_number = models.IntegerField(_('school number'), blank = True, null = True)
+
   is_staff = models.BooleanField(
     _('staff status'),
     default = False,
