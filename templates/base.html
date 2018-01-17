@@ -55,11 +55,11 @@
               <a class="dropdown-toggle" data-toggle="dropdown" role="button"><span class="glyphicon glyphicon-folder-open"></span> 課題提出<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li role="presentation"><a href="{% url 'post:index' %}">HOME</a></li>
-                <li role="presentation"><a href="{% url 'post:new' %}">アップロード</a></li>
-                <li role="presentation"><a href="{% url 'post:draft_list' %}">提出一覧</a></li>
+                <li role="presentation"><a href="{% url 'post:new' %}">新規作成</a></li>
+                <li role="presentation"><a href="{% url 'post:draft_list' %}">下書き一覧</a></li>
               </ul>
             </li>
-            <li class=""><a href="{% url 'admin:index' %}"><span class="glyphicon glyphicon-tags"></span> 出席確認</a></li>
+            <li class=""><a href="{% url 'post:index' %}"><span class="glyphicon glyphicon-tags"></span> 出席確認</a></li>
           </ul>
 
           <!-- ヘッダー右側のアイコン -->

@@ -2,7 +2,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-  url(r'^$', views.index, name = 'index'),
+  url(r'^$', views.IndexView.as_view(), name = 'index'),
   url(r'^(?P<pk>[0-9]+)/$', views.detail, name = 'detail'),
   url(r'^new/$', views.PostNew.as_view(), name = 'new'),
   url(r'^(?P<pk>[0-9]+)/edit/$', views.PostUpdate.as_view(), name = 'edit'),
@@ -19,4 +19,5 @@ urlpatterns = [
 
   url(r'regi/$', views.regi_view, name = 'regi'),
   url(r'kadai/$', views.kadai_view, name = 'kadai'),
+  url(r'log/$', views.login_view, name = 'log'),
 ]

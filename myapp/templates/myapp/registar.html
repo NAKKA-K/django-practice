@@ -1,72 +1,70 @@
-<DOCTYPE html>
-<head>
-  <html lang="ja">
-  <meta charset="utf-8">
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
   <title>Registar</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link href='css/sub3.css' rel='stylesheet'  type='text/css'>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-social.css">
-</head>
-<body>
-<div class="card card-container">
-		<!--トップ-->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+{% endblock header %}
+
+{% block contents %}
+  <div class="card card-container">
+    <!--トップ-->
     <ul class="nav nav-tabs">
-        <li><a href="login.html" data-toggle="tab">ログイン</a></li>
-        <li class="active"><a href="#Registar" data-toggle="tab">新規登録</a></li>
+      <li><a href="/login/" data-toggle="tab">ログイン</a></li>
+      <li class="active"><a href="/user_creation/" data-toggle="tab">新規登録</a></li>
     </ul>
     <!--digifarm kun image-->
-    <img class="image-circle" src="image/digi.jpg" width="150" length="150">
+    <img class="image-circle" src="{% static 'image/digi.jpg' %}" width="150" length="150">
 
     <hr>
-<div class="tab-pane" id="Registration">
+
+
+    <div class="tab-pane" id="Registration">
+
       <div class="form-group">
-      <label for="name" class="cols-sm-2 control-label">Username</label>
-      <div class="cols-sm-10">
-        <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-          <input type="text" class="form-control" name="name" id="name"  placeholder="Username" required>
+        <label for="name" class="cols-sm-2 control-label">Username</label>
+        <div class="cols-sm-10">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+            <input type="text" class="form-control" name="name" id="name"  placeholder="Username" required>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="email" class="cols-sm-2 control-label">Email</label>
-      <div class="cols-sm-10">
-        <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-          <input type="text" class="form-control" name="email" id="email"  placeholder="メールアドレス" required>
+      <div class="form-group">
+        <label for="email" class="cols-sm-2 control-label">Email</label>
+        <div class="cols-sm-10">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+            <input type="text" class="form-control" name="email" id="email"  placeholder="メールアドレス" required>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="password" class="cols-sm-2 control-label">Password</label>
-      <div class="cols-sm-10">
-        <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-          <input type="password" class="form-control" name="password" id="password"  placeholder="パスワード" required>
+      <div class="form-group">
+        <label for="password" class="cols-sm-2 control-label">Password</label>
+        <div class="cols-sm-10">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+            <input type="password" class="form-control" name="password" id="password"  placeholder="パスワード" required>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="password" class="cols-sm-2 control-label">パスワードの再入力</label>
-      <div class="cols-sm-10">
-        <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-          <input type="password" class="form-control" name="password" id="password"  placeholder="パスワードをもう一度" required>
+      <div class="form-group">
+        <label for="password" class="cols-sm-2 control-label">パスワードの再入力</label>
+        <div class="cols-sm-10">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+            <input type="password" class="form-control" name="password" id="password"  placeholder="パスワードをもう一度" required>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div>
-            <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">登録</button>
-        </div>
-        </a>
+      <div>
+        <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">登録</button>
+      </div>
+
+    </div>
   </div>
-</div>
-</div>
-<!-- Registration Form -->
+{% endblock contents %}
